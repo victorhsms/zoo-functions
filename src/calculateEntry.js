@@ -5,12 +5,16 @@ const child = (person) => person.age < 18;
 const adult = (person) => person.age >= 18 && person.age < 50;
 const senior = (person) => person.age >= 50;
 
+const objeto = (entrants) => ({
+  child: entrants.filter(child).length,
+  adult: entrants.filter(adult).length,
+  senior: entrants.filter(senior).length,
+});
+
 function countEntrants(entrants = {}) {
-  return entrants === {} ? 0 : {
-    child: entrants.filter(child).length,
-    adult: entrants.filter(adult).length,
-    senior: entrants.filter(senior).length,
-  };
+  // ref: https://stackoverflow.com/questions/55458675/filter-is-not-a-function
+  const entrant = Object.values(entrants);
+  return entrants === [] ? 0 : objeto(entrant);
 }
 
 function calculateEntry(entrants) {
