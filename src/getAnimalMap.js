@@ -6,25 +6,25 @@ const compass = ['NE', 'NW', 'SE', 'SW'];
 const mapName = ((item) => item.name);
 
 const program = {
-  itsSorted(specime) {
+  itsSorted(specime) { // Função que cria um array só com nome de todos os animais em ordem alfabética.
     const animal = species.find((specie) => specie.name === specime).residents;
     return animal.map(mapName).sort();
   },
 
-  itsSex(opt, specime) {
+  itsSex(opt, specime) { // Função que cria um array com o nome dos animais de acordo com o sexo informado.
     const animals = species.find((specie) => specie.name === specime).residents;
     return animals.filter((animal) => animal.sex === opt.sex).map(mapName);
   },
 
-  itsSAS(opt, specime) {
+  itsSAS(opt, specime) { // Função que cria um array com o nome dos animais de acordo com o sexo informado e coloca em ordem alfabética.
     const animals = species.find((specie) => specie.name === specime).residents;
     return animals.filter((animal) => animal.sex === opt.sex).map(mapName).sort();
   },
-  itsIncNames(specime) {
+  itsIncNames(specime) { // Função que apenas retorna o nome de todos os animais.
     const animal = species.find((specie) => specie.name === specime).residents;
     return animal.map(mapName);
   },
-  itsUdf() {
+  itsUdf() { // Função para o retorno default.  Retorna apenas das espécies dos animais.
     const directions = {};
     compass.forEach((i) => {
       directions[i] = species.filter((s) => s.location === i).map(mapName);
@@ -33,7 +33,7 @@ const program = {
   },
 };
 
-const routes = {
+const routes = { // Grupo de funções de rotas que personaliza o retorno final.
   onlySorted(opt, s) { // Função rota que verifica se pelomenos o parâmetro Sex existe. Caso contrário, só includeNames existe.
     return opt.sorted !== undefined ? program.itsSorted(s) : program.itsIncNames(s);
   },
@@ -50,7 +50,7 @@ const dataBase = {
     const result = species.filter((s) => s.location === i);
     return result === undefined ? 'a' : result;
   },
-  mkArry(opt) {
+  mkArry(opt) { // Função central: faz um template do retorno final onde muda apenas o último array de acordo com o parâmetro.
     const directions = {};
     compass.forEach((i) => {
       directions[i] = [];
@@ -59,7 +59,7 @@ const dataBase = {
       const sMapped = specimes.map(mapName);
       sMapped.forEach((specime) => {
         const newAnimal = {};
-        newAnimal[specime] = routes.sexAndSort(opt, specime);
+        newAnimal[specime] = routes.sexAndSort(opt, specime); // personaliza o últiimo array de acordo com o parâmetro.
         directions[i].push(newAnimal);
       });
       directions[i].shift();
