@@ -5,10 +5,10 @@ const data = require('../data/zoo_data');
 
 const teste = (acc, animal) => Math.max(acc, animal.age);
 function getOldestFromFirstSpecies(id) {
-  const funcionarioEncontrado = employees.find((funcionario) => funcionario.id === id);
-  const animaisResp = funcionarioEncontrado.responsibleFor[0];
-  const animalEncontrado = species.find((animal) => animal.id === animaisResp);
-  const mIdade = animalEncontrado.residents.reduce(teste, 0);
+  const employee = employees.find((funcionario) => funcionario.id === id).responsibleFor[0];
+  const animalEncontrado = species.find((animal) => animal.id === employee);
+  const residentsAnimals = animalEncontrado.residents;
+  const mIdade = residentsAnimals.reduce(teste, 0);
   const animalFinal = animalEncontrado.residents.find((animal) => animal.age === mIdade);
   const resultado = [animalFinal.name, animalFinal.sex, animalFinal.age];
   return resultado;
