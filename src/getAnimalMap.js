@@ -53,8 +53,7 @@ const dataBase = {
   mkArry(opt) { // Função central: faz um template do retorno final onde muda apenas o último array de acordo com o parâmetro.
     const directions = {};
     compass.forEach((i) => {
-      directions[i] = [];
-      directions[i][0] = {};
+      directions[i] = [{}];
       const specimes = dataBase.verifySpecie(i);
       const sMapped = specimes.map(mapName);
       sMapped.forEach((specime) => {
